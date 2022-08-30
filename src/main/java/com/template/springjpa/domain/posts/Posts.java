@@ -4,16 +4,21 @@ import com.template.springjpa.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
 @Entity
+@DynamicInsert
+@DynamicUpdate
 public class Posts extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE) //h2 db
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)  //mysql
     private Long id;
 
     @Column(nullable = false)
@@ -51,6 +56,7 @@ public class Posts extends BaseTimeEntity {
         this.attachedFileUrl = attachedFileUrl;
         this.appendUser = appendUser;
     }
+
 
     public void update(boolean useYn, int code, String title,
                        String content, String attachedFileName,
