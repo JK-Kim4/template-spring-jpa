@@ -1,6 +1,7 @@
 package com.template.springjpa.domain.posts;
 
 import com.template.springjpa.domain.BaseTimeEntity;
+import com.template.springjpa.web.dto.PostSaveDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -60,7 +61,7 @@ public class Posts extends BaseTimeEntity {
 
     public void update(boolean useYn, int code, String title,
                        String content, String attachedFileName,
-                       String attachedFileUrl, int appendUser){
+                       String attachedFileUrl){
 
         this.useYn = useYn;
         this.code = code;
@@ -69,6 +70,16 @@ public class Posts extends BaseTimeEntity {
         this.attachedFileName = attachedFileName;
         this.attachedFileUrl = attachedFileUrl;
         this.appendUser = appendUser;
+    }
+
+    public void update(PostSaveDto dto){
+        this.useYn = dto.isUseYn();
+        this.code = dto.getCode();
+        this.title = dto.getTitle();
+        this.content = dto.getContent();
+        this.attachedFileName = dto.getAttachedFileName();
+        this.attachedFileUrl = dto.getAttachedFileUrl();
+        this.appendUser = 1;
     }
 
 }

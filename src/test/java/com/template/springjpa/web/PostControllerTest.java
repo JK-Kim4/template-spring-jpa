@@ -2,6 +2,7 @@ package com.template.springjpa.web;
 
 import com.template.springjpa.domain.posts.Posts;
 import com.template.springjpa.domain.posts.PostsRepository;
+import com.template.springjpa.web.dto.PostSaveDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,6 +56,26 @@ public class PostControllerTest {
         assertThat(result.getTitle()).isEqualTo(title);
         assertThat(result.getContent()).isEqualTo(content);
 
+    }
+
+    @Test
+    public void Post_수정테스트(){
+        //given
+        Posts saveEntity = repository.save(Posts.builder()
+                .useYn(true)
+                .code(1)
+                .title("test title")
+                .content("test content")
+                .build());
+
+        Long postId = saveEntity.getId();
+        String updateTitle = "update title";
+        String updateContent = "update content";
+
+        PostSaveDto dto = PostSaveDto.builder()
+                .title(updateTitle)
+                .content(updateContent)
+                .build();
     }
 
 
